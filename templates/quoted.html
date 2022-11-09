@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Stock Quote
+{% endblock %}
+
+{% block main %}
+
+<div>
+A share of {{ session["quote_name"] }} {{ session["quote_symbol"] }} costs {{ session["quote_price"] | usd }}.
+</div>
+{% endblock %}

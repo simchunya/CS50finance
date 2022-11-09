@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All that you own
+{% endblock %}
+
+{% block main %}
+
+{% if list_of_stocks|length < 1 %}
+<h4> There are no stocks to show. Buy some today!</h4>
+{% else %}
+
+<table class="table table-hover" :hover {
+    background-color=#000000;
+}>
+    <thead class="text-dark">
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>shares</th>
+            <th>Current Price</th>
+            <th>Total Value</th>
+        </tr>
+    </thead>
+    {% for stock in list_of_stocks %}
+    <tbody class="text-dark">
+        <tr>
+            <td>{{ stock.symbol }}</td>
+            <td>{{ stock.name }}</td>
+            <td>{{ stock.share }}</td>
+            <td>{{ stock.price | usd }}</td>
+            <td>{{ (stock.price * stock.share) | usd }}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>Total stocks Value</td>
+        <td>{{ stocks_value | usd }}</td>
+    </tr>
+    <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Cash</td>
+            <td>{{ current_cash.cash | usd }}</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>Total</td>
+            <td>{{ total | usd }}</td>
+        </tr>
+</table>
+{% endif %}
+
+{% endblock %}

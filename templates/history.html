@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    All that you did
+{% endblock %}
+
+{% block main %}
+
+{% if user_history|length < 1 %}
+<h4> You havent done any stonks. YOLO some money today!</h4>
+{% else %}
+
+<table class="table table-hover" :hover {
+    background-color=#000000;
+}>
+    <thead class="text-dark">
+        <tr>
+            <th>Txn Date</th>
+            <th>Action</th>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>shares</th>
+            <th>Price</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    {% for txn in user_history %}
+    <tbody class="text-dark">
+        <tr>
+            <td>{{ txn.Txndate }}</td>
+            <td>{{ txn.Type }}</td>
+            <td>{{ txn.Symbol }}</td>
+            <td>{{ txn.Name }}</td>
+            <td>{{ txn.Shares }}</td>
+            <td>{{ txn.Price | usd }}</td>
+            <td>{{ (txn.Price * txn.Shares) | usd }}</td>
+        </tr>
+    </tbody>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% endblock %}
